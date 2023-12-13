@@ -1,0 +1,87 @@
+//3) Write C++ program to draw the following pattern. Use DDA line 
+//and Bresenham’s circle drawing algorithm. Apply the concept of 
+//encapsulation. 
+//
+//
+
+
+
+
+
+
+
+#include<iostream>
+#include<graphics.h>
+using namespace std;
+void drawcircle(int r,int xc,int yc)
+{
+int x=0,y=r;
+int p=3-2*r;
+while(x<y)
+{
+
+    if(p>0)
+    {
+      x=x+1;
+        y=y-1;
+    p=p+4*(x-y)+10;
+
+    }
+    else
+
+    {
+        x++;
+        p=p+4*x+6;
+    }
+    putpixel(xc+x,yc+y,1);
+    putpixel(xc+x,yc-y,2);
+    putpixel(xc-x,yc+y,3);
+    putpixel(xc-x,yc-y,4);
+    putpixel(xc+y,yc+x,5);
+    putpixel(xc+y,yc-x,6);
+    putpixel(xc-y,yc+x,7);
+    putpixel(xc-y,yc-x,8);
+//delay(100);
+}
+}
+
+int ddaline(int x1,int y1,int x2,int y2)
+{
+    float dx,dy,len,xi,yi,xn,yn,step,i;
+dx=x2-x1;
+dy=y2-y1;
+   if(abs(dx)>=abs(dy))
+   {
+    step=abs(dx);
+   }
+   else
+    step=abs(dy);
+   xi=dx/step;
+   yi=dy/step;
+   xn=x1;
+   yn=y1;
+   for(i=1;i<=step;i++)
+   {
+    putpixel(xn,yn,4);
+       xn +=xi;
+       yn +=yi;
+       delay(10);
+   }
+}
+int main()
+{
+int gm,gd=DETECT;
+    initgraph(&gm,&gd,"");
+    int r,xc,yc;
+    cout<<"Enter r,xc,yc"<<endl;
+    cin>>r>>xc>>yc;
+    drawcircle(r,xc,yc);
+    drawcircle(r/2,xc,yc);
+    ddaline(xc,yc-r,xc-(0.866*r),yc+r/2);
+    ddaline(xc,yc-r,xc+(0.866*r),yc+r/2);
+    ddaline(xc+(0.866*r),yc+r/2,xc-(0.866*r),yc+r/2);
+    getch();
+    closegraph();
+    return 0;
+
+}
