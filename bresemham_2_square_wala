@@ -1,0 +1,51 @@
+#include<iostream>
+#include<graphics.h>
+int ddaline(int x1,int y1,int x2,int y2)
+{
+float dx,dy,len,xi,yi,xn,yn,step,i;
+dx=x2-x1;
+dy=y2-y1;
+   if(abs(dx)>=abs(dy))
+   {
+    step=abs(dx);
+   }
+   else
+    step=abs(dy);
+   xi=dx/step;
+   yi=dy/step;
+   xn=x1;
+   yn=y1;
+   for(i=1;i<=step;i++)
+   {
+    putpixel(xn,yn,4);
+       xn +=xi;
+       yn +=yi;
+       delay(10);
+   }
+}
+int main()
+{
+int gm,gd=DETECT;
+    initgraph(&gm,&gd,"");
+    int r,xc,yc;
+
+//outer Rectangle
+    ddaline(50,150,150,150);
+    ddaline(150,150,150,100);
+    ddaline(150,100,50,100);
+     ddaline(50,100,50,150);
+//Rambus
+    ddaline(100,150,150,125);
+    ddaline(150,125,100,100);
+    ddaline(100,100,50,125);
+    ddaline(50,125,100,150);
+//Inner rectangle
+    ddaline(125,137,125,112);
+    ddaline(125,112,75,112);
+    ddaline(75,112,75,137);
+    ddaline(75,137,125,137);
+    getch();
+    closegraph();
+    return 0;
+
+}
