@@ -1,0 +1,70 @@
+#include<iostream>
+#include<graphics.h>
+void drawcircle(int r,int xc,int yc)//Function Declaration
+{
+int x=0,y=r;
+int p=3-2*r;
+while(x<y)
+{
+    if(p>0)
+    {
+      x=x+1;
+        y=y-1;
+    p=p+4*(x-y)+10;
+
+    }
+    else
+
+    {
+        x++;
+        p=p+4*x+6;
+    }
+    putpixel(xc+x,yc+y,WHITE);
+    putpixel(xc+x,yc-y,WHITE);
+    putpixel(xc-x,yc+y,WHITE);
+    putpixel(xc-x,yc-y,WHITE);
+    putpixel(xc+y,yc+x,WHITE);
+    putpixel(xc+y,yc-x,WHITE);
+    putpixel(xc-y,yc+x,WHITE);
+    putpixel(xc-y,yc-x,WHITE);
+delay(10);
+}
+}
+int ddaline(int x1,int y1,int x2,int y2)
+{
+float dx,dy,len,xi,yi,xn,yn,step,i;
+dx=x2-x1;
+dy=y2-y1;
+   if(abs(dx)>=abs(dy))
+   {
+    step=abs(dx);
+   }
+   else
+    step=abs(dy);
+   xi=dx/step;
+   yi=dy/step;
+   xn=x1;
+   yn=y1;
+   for(i=1;i<=step;i++)
+   {
+    putpixel(xn,yn,4);
+       xn +=xi;
+       yn +=yi;
+       //delay(10);
+   }
+}
+int main()
+{
+int gm,gd=DETECT;
+    initgraph(&gm,&gd,"");
+    int r,xc,yc;
+    drawcircle(50,100,100);
+    drawcircle(25,100,100);
+    ddaline(60,125,140,125);
+    ddaline(140,125,100,50);
+    ddaline(100,50,60,125);
+    getch();
+    closegraph();
+    return 0;
+
+}
